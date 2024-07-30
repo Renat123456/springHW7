@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
+    <title>Time sheets</title>
+</head>
+<body>
+<h1>Time sheets</h1>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Project</th>
+        <th>Minutes</th>
+        <th>Created</th>
+    </tr>
+    <tr th:each="timesheet: ${timesheets}">
+        <td><a th:href="@{/timesheets/{id}(id = ${timesheet.id})}" th:text="${timesheet.id}"></a></td>
+        <td><a th:href="@{/timesheets/projects/{id}(id = ${timesheet.projectId})}" th:text="${timesheet.projectId}"></a></td>
+        <td th:text="${timesheet.minutes}"></td>
+        <td th:text="${timesheet.createdAt}"></td>
+    </tr>
+</table>
+</body>
+</html>

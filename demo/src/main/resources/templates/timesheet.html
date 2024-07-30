@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
+    <title>Time sheet</title>
+</head>
+<body>
+<h1>Time sheet <span th:text="${timesheet.id}"></span></h1>
+<p th:text="${timesheet.projectId}"></p>
+<p th:text="${timesheet.minutes}"></p>
+<p th:text="${timesheet.createdAt}"></p>
+
+</body>
+</html>
