@@ -21,23 +21,28 @@ public class SecurityConfig {
 //    }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/timesheets/**").hasAnyAuthority(Role.USER.getName()) // каталог закрыт
-                        .requestMatchers("/projects/**").hasAnyAuthority(Role.ADMIN.getName()) // каталог закрыт
-                        .requestMatchers("/api/**").hasAuthority(Role.REST.getName()) // каталог закрыт
-//                        .requestMatchers("/timesheets/**").hasAnyRole() // каталог закрыт нужна одна из ролей
-//                        .requestMatchers("/timesheets/**").hasRole() // каталог закрыт нужна роль
-//                        .anyRequest().denyAll() // все заблокировано
-                        .anyRequest().permitAll()) // все открыто
-//                        .anyRequest().authenticated()) // нужна авторизация
-//                .formLogin(it -> it.loginPage("/login.html")) //ссылка на страницу входа
-//                .formLogin(it -> it.disable()) // страницы входа нет
-                .formLogin(Customizer.withDefaults()) // стандартная форма
-                .build();
-
+    SecurityFilterChain noSecurity(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity.authorizeHttpRequests(requests -> requests.anyRequest().permitAll()).build();
     }
+
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        return httpSecurity
+//                .authorizeHttpRequests(requests -> requests
+//                        .requestMatchers("/timesheets/**").hasAnyAuthority(Role.USER.getName()) // каталог закрыт
+//                        .requestMatchers("/projects/**").hasAnyAuthority(Role.ADMIN.getName()) // каталог закрыт
+//                        .requestMatchers("/api/**").hasAuthority(Role.REST.getName()) // каталог закрыт
+////                        .requestMatchers("/timesheets/**").hasAnyRole() // каталог закрыт нужна одна из ролей
+////                        .requestMatchers("/timesheets/**").hasRole() // каталог закрыт нужна роль
+////                        .anyRequest().denyAll() // все заблокировано
+//                        .anyRequest().permitAll()) // все открыто
+////                        .anyRequest().authenticated()) // нужна авторизация
+////                .formLogin(it -> it.loginPage("/login.html")) //ссылка на страницу входа
+////                .formLogin(it -> it.disable()) // страницы входа нет
+//                .formLogin(Customizer.withDefaults()) // стандартная форма
+//                .build();
+//    }
+
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
